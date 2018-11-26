@@ -1,4 +1,5 @@
-from flask import request, g
+from flask import request, g, jsonify
+from mypay.core import db
 from ..models import Users, Record
 from . import pay_web_v1
 
@@ -6,4 +7,20 @@ from . import pay_web_v1
 def pay_query():
     if request.method == 'POST':
         user_id = request.cookies.get('user_id')
-         = request.form['data']
+        post_data = request.form['data']
+        pay_num = post_data.get('num')
+        description = post_data.get('description')
+        pay_kind = post_data.get('pay_kind')
+        if not (user_id and pay_num and description):
+            return "Argument error"
+        db.session.add(Record(user_id=user_id, pay_num=pay_num, 
+            description=description, pay_kind=pay_kind))
+        db.commit()
+    else:
+        user_id = request.cookies.get('user_id')
+        record_list = Record.query.filter_by(Record.user_id=user_id).all()
+        records = []
+        for record in record_list:
+            records.append({"pay_num": record.pay_num, "description": record.description, "pay_kind": record.pay_kind})
+        return jsonify({"data": records})
+
