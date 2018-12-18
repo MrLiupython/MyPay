@@ -3,4 +3,6 @@
 local_setting.py
 venv
 __pycache__
+mypay/__pycache__
+mypay/pay/__pycache__
 migrations

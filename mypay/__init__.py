@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+from config import TEMPLATEDIR
 import logging
 from logging import Formatter
 from logging.handlers import RotatingFileHandler
@@ -9,7 +10,7 @@ from .models import Users, Record
 from .pay import pay_web_v1
 
 def init_app():
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder=TEMPLATEDIR)
     app.config.from_object('config')
     api.init_app(app)
     db.init_app(app)

@@ -1,4 +1,5 @@
-from flask import request, g, jsonify
+# -*- coding: utf-8 -*-
+from flask import request, g, jsonify, render_template, abort, url_for
 from mypay.ext import db
 from mypay.models import Users, Record
 from . import pay_web_v1
@@ -27,14 +28,19 @@ def pay_query():
 @pay_web_v1.route('add', methods=['POST'])
 def addPay():
     data = request.form
+    verify_value = data.get('who')
     user_id = data.get('user_id')
     pay_num = data.get('pay_num')
-    des = data.get('description', 'Others')
-    if not (user_id and pay_num):
+    if not user_id or not pay_num or verify_value != "MrLiu":
         abort(104)
+    des = data.get('description', 'Others')
     db.session.add(Record(
         user_id=user_id,
         pay_num=int(pay_num),
         description=des))
     db.session.commit()
     return "ok!" 
+
+@pay_web_v1.route('index', methods=['GET'])
+def index():
+    return render_template("index.html")
