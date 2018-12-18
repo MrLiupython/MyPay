@@ -3,4 +3,4 @@
 local_setting.py
 venv
 __pycache__
-migrate
+migrates
