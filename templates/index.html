@@ -1,0 +1,17 @@
+<html class="" lange="en">
+  <meta charset="utf-8">
+  <head> My Pay</head>
+  <body>
+    <title>Welcome to My Pay!</title>
+    <form class="payInformatin" id="payForm" action={{ url_for('pay_web_v1.addPay') }} method="POST">
+      <input type="text" name="user_id" id="user_id" placeholder="your id">
+      <br >
+      <input type="text" name="pay_num" id="pay_num" placeholder="your pay">
+      <br>
+      <input type="text" name="description" id="description" placeholder="descriptions">
+      <input type="hidden" name="who" value="MrLiu">
+      <br>
+      <button>Submit</button>
+    </form>
+  </body>
+</html>
