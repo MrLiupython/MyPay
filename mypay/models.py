@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from mypay.core import db
+from mypay.ext import db
 from datetime import datetime
 class Users(db.Model):
     __tablename__ = "users"
@@ -12,7 +12,7 @@ class Users(db.Model):
 
 class Record(db.Model):
     __tablename__ = "record" 
-    id = db.Column(db.Integer, primary_key=True, autoincremnent=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     create_time = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, nullable=False)
     pay_num = db.Column(db.Integer, nullable=False)

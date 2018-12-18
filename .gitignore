@@ -1,4 +1,6 @@
 *.py~
 *.pyc~
-
-
+local_setting.py
+venv
+__pycache__
+migrate
