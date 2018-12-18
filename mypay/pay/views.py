@@ -19,7 +19,9 @@ def pay_query():
         db.commit()
     else:
         user_id = request.cookies.get('user_id')
-        record_list = Record.query.filter_by(Record.user_id==user_id).all()
+        if not user_id:
+            return "Are you sure you had logon?"
+        record_list = Record.query.filter_by(user_id=user_id).all()
         records = []
         for record in record_list:
             records.append({"pay_num": record.pay_num, "description": record.description, "pay_kind": record.pay_kind})
