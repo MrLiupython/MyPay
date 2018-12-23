@@ -38,7 +38,7 @@ def addPay():
     des = data.get('description', 'Others')
     db.session.add(Record(
         user_id=user_id,
-        pay_num=int(pay_num),
+        pay_num=float(pay_num),
         description=des))
     db.session.commit()
     return "ok!" 
